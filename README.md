@@ -6,7 +6,8 @@ Most RAG demos stop at "it retrieved something and wrote an answer." LitRAG goes
 
 Built on **LangChain** (orchestration) + **Hugging Face** `sentence-transformers` (embeddings) + **FAISS** (vector store), so it runs locally with no managed vector-DB key required.
 
-> Status: scaffold. See the build plan below.
+> Status: built. Corpus = 15 real semaglutide abstracts (see `data/`). Retrieval runs
+> locally and is verified; generation + faithfulness judge need an LLM key (see Quickstart).
 
 ---
 
@@ -80,11 +81,64 @@ Keep it small. A reviewer should be able to read the whole thing in ten minutes.
 
 ## Framework notes (LangChain vs. LlamaIndex)
 
-> _To be written from the build, not from the docs._ Cover, concretely:
-> - What LangChain's abstraction bought (retriever/chain composition, swappable LLM + embedder)
-> - Where it added indirection you didn't need
-> - How the same retrieve-then-generate would look in LlamaIndex (`VectorStoreIndex.from_documents(...).as_query_engine()`), and which is the better fit for a pipeline this size
-> - The honest takeaway: when a framework earns its place vs. when the SDK-direct approach wins
+_Written from the build, not the docs._
+
+**What LangChain bought.**
+
+- **`Document` + metadata as the universal currency.** `ingest.py` emits
+  `Document(page_content, metadata={pmid, title, source})`; FAISS embeds it, the
+  retriever returns it, and the `{pmid, title, source}` rides through embedding and
+  retrieval untouched. The faithfulness eval needs exactly that provenance, and the
+  framework carried it end-to-end for free — no parallel bookkeeping of "which text
+  came from which abstract."
+- **Swappable embedder + LLM.** `HuggingFaceEmbeddings` and `ChatAnthropic` are drop-in;
+  switching the judge/generator to OpenAI is a one-line import change. The local
+  embedder and the API generator sit behind the same interfaces.
+- **`with_structured_output(PydanticModel)`.** This is the biggest win for *this*
+  pipeline. Structured per-claim citations (`{answer, claims:[{text, cited_quote,
+  source}]}`) are the whole point, and I got validated objects back without hand-writing
+  a tool schema or a parser — just a Pydantic model.
+- **FAISS persistence.** `from_documents` / `save_local` / `load_local` gave embed-once,
+  reuse-after for nothing (see `index.get_or_build_index`).
+
+**Where it added indirection.**
+
+- **LCEL composition is clean until you debug it.** `{"context": retriever | format,
+  "question": passthrough} | prompt | structured` reads well, but the dict→Runnable
+  coercion is opaque: drop a non-`Runnable` into that dict and you get a cryptic
+  `Expected a Runnable, callable or dict` from deep in `coerce_to_runnable`, far from
+  the line you wrote. (Hit this verbatim while wiring a test stub.)
+- **The judge left the framework on purpose.** `faithfulness.grade_support` uses the raw
+  Anthropic SDK, not LangChain — because it wants *forced* tool use **and**
+  `cache_control` on the source-passage content block (so checking many claims against
+  one long abstract reuses the cached passage). `with_structured_output` abstracts the
+  tool away, but it also abstracts away per-block cache control — so the one place I most
+  wanted provider-specific control is the place I dropped out of the abstraction. That's
+  the honest seam.
+- **`HuggingFaceEmbeddings` is a thin wrapper.** For a corpus this small you could call
+  `sentence-transformers` + `faiss` directly in ~20 lines and lose almost nothing.
+
+**The same thing in LlamaIndex.** Retrieve-then-generate collapses to roughly:
+
+```python
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
+index = VectorStoreIndex.from_documents(SimpleDirectoryReader("data/").load_data())
+print(index.as_query_engine().query("How much weight loss with semaglutide?"))
+```
+
+Fewer lines, retrieval and synthesis fused, and LlamaIndex's node model +
+`CitationQueryEngine` arguably fit "answer with sources" more natively, since citation is
+a first-class concern there rather than something you bolt on with a Pydantic schema.
+
+**The honest takeaway.** For a 5-file pipeline the framework earns its place on the
+*glue* — the `Document`/metadata plumbing and `with_structured_output` — and costs a
+layer exactly where the product lives: the faithfulness judge, which I built on the
+Anthropic SDK directly for forced tool use + caching. Neither framework touches the two
+things that make this repo more than a demo (the per-claim `cited_quote` contract and the
+two-stage groundedness check) — those are plain Pydantic + the SDK. So: reach for the
+framework for the boring 80% (load → embed → retrieve → structure); drop to the SDK for
+the 20% that *is* the point. If retrieval-with-citations were the whole product,
+LlamaIndex would be the better-fitting default at this size.
 
 ---
 
