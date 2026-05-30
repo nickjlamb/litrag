@@ -118,7 +118,13 @@ _Written from the build, not the docs._
 - **`HuggingFaceEmbeddings` is a thin wrapper.** For a corpus this small you could call
   `sentence-transformers` + `faiss` directly in ~20 lines and lose almost nothing.
 
-**The same thing in LlamaIndex.** Retrieve-then-generate collapses to roughly:
+### LitRAG in LlamaIndex — a design read
+
+_I built the pipeline in LangChain; this section is how I'd map it onto LlamaIndex and
+the trade-offs I'd expect — **not** a second, shipped implementation. Kept deliberately
+separate from the build notes above, which are from the build._
+
+Retrieve-then-generate collapses to roughly:
 
 ```python
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
@@ -126,9 +132,39 @@ index = VectorStoreIndex.from_documents(SimpleDirectoryReader("data/").load_data
 print(index.as_query_engine().query("How much weight loss with semaglutide?"))
 ```
 
-Fewer lines, retrieval and synthesis fused, and LlamaIndex's node model +
-`CitationQueryEngine` arguably fit "answer with sources" more natively, since citation is
-a first-class concern there rather than something you bolt on with a Pydantic schema.
+Mapping LitRAG's pieces onto LlamaIndex primitives:
+
+| LitRAG (LangChain) | LlamaIndex equivalent |
+|--------------------|-----------------------|
+| `Document(page_content, metadata={pmid, title, source})` | `TextNode` + `metadata`, with `excluded_embed_metadata_keys` to keep PMIDs out of the embedded text |
+| `ingest.chunk` (word-window splitter) | a `SentenceSplitter` / `TokenTextSplitter` node parser |
+| `HuggingFaceEmbeddings` | `HuggingFaceEmbedding` (same sentence-transformers model) |
+| `FAISS.from_documents` | `VectorStoreIndex` over a `FaissVectorStore` |
+| `store.as_retriever(search_kwargs={"k": 4})` | `index.as_retriever(similarity_top_k=4)` |
+| `llm.with_structured_output(StructuredAnswer)` | `index.as_query_engine(output_cls=StructuredAnswer)` (Pydantic program) |
+| hand-rolled per-claim `cited_quote` contract | `CitationQueryEngine` — citations are first-class; the response carries `source_nodes` |
+
+**What it would buy.** Citation is native. `CitationQueryEngine` numbers its sources and
+hands back the `source_nodes` it used, so "answer with provenance" isn't something I bolt
+on with a Pydantic schema — it's the default contract. For a product whose entire point
+is grounded citations, that's a genuine fit advantage.
+
+**What would stay exactly the same.** The faithfulness judge. `faithfulness.grade_support`
+would still drop to the raw Anthropic SDK for *forced* tool use + `cache_control` on the
+passage — LlamaIndex abstracts those away just as LangChain does. The honest seam
+(framework for retrieval, SDK for the eval that *is* the product) is identical either
+way; the framework choice only ever touches the boring 80%.
+
+**What it would cost.** A second embedding/index stack to maintain, and — the real catch —
+LlamaIndex's citation synthesizer re-chunks and renumbers sources its own way, which
+fights the contract the eval depends on. The locator needs the model to quote a span
+*verbatim* from a retrieved passage; a synthesizer that paraphrases into a numbered
+citation breaks `locate_quote` before the judge ever runs. Reconciling first-class
+citations with a verbatim-quote requirement is non-trivial, and it's the main reason
+swapping frameworks isn't a free lunch here.
+
+**Honest status.** Not built. If the LlamaIndex equivalent matters for a given purpose,
+the right move is a small `rag_llamaindex.py` variant — code, not more prose.
 
 **The honest takeaway.** For a 5-file pipeline the framework earns its place on the
 *glue* — the `Document`/metadata plumbing and `with_structured_output` — and costs a
