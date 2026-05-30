@@ -1,0 +1,18 @@
+# Orchestration
+langchain
+langchain-community
+langchain-anthropic
+langchain-huggingface
+
+# Embeddings + vector store (local, no managed key)
+sentence-transformers
+faiss-cpu
+
+# LLM client + eval helpers
+anthropic
+rapidfuzz
+pandas
+python-dotenv
+
+# Dev
+pytest

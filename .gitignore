@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Env / secrets
+.env
+
+# Build artifacts
+faiss_index/
+*.faiss
+*.pkl
+
+# OS
+.DS_Store
