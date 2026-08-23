@@ -8,8 +8,7 @@ For each claim the model makes:
   2. If located, use an LLM-as-judge to grade whether the source SUPPORTS the claim:
      supports / partial / contradicts / not_found.
 
-Locator + judge logic ported from the cookbook citation_faithfulness.py
-(/Users/NickLamb/jobs/cookbook-contribution/citation_faithfulness.py): a cheap,
+Locator + judge logic ported from a cookbook citation-faithfulness notebook: a cheap,
 unspoofable string check in front of an LLM judge that grades ONLY from the passage.
 """
 

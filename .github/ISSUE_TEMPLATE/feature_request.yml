@@ -1,0 +1,20 @@
+name: Feature request
+description: Suggest an improvement or roadmap item
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Focus on the groundedness story — LitRAG stays small on purpose.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: Sketch how it would fit the existing five-file pipeline.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

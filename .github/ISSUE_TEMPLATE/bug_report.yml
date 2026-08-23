@@ -1,0 +1,33 @@
+name: Bug report
+description: Something doesn't work as documented
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, and what went wrong?
+      placeholder: I asked "..." against the sample corpus and ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant output
+      description: >
+        For eval issues, paste the verdict output (label, locate_score, rationale) —
+        it usually localizes the problem quickly. For crashes, paste the traceback.
+      render: text
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "Python 3.12, macOS 15, litrag v0.1.0"
+    validations:
+      required: true

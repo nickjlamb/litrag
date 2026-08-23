@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use LitRAG in your work, please cite it as below."
+title: "LitRAG: grounded literature RAG with a citation-faithfulness eval"
+type: software
+authors:
+  - family-names: Lamb
+    given-names: Nick
+    website: "https://www.pharmatools.ai"
+repository-code: "https://github.com/nickjlamb/litrag"
+url: "https://www.pharmatools.ai/litrag"
+license: MIT
+version: 0.1.0
+date-released: 2026-08-23
+keywords:
+  - retrieval-augmented generation
+  - hallucination detection
+  - citation faithfulness
+  - groundedness
+  - medical literature
+  - evaluation

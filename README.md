@@ -1,183 +1,164 @@
+<div align="center">
+
 # LitRAG
 
-**Grounded retrieval-augmented generation over the medical literature — with a citation-faithfulness eval built in.**
+**Retrieval-augmented generation over the medical literature — with a citation-faithfulness eval built in.**
 
-Most RAG demos stop at "it retrieved something and wrote an answer." LitRAG goes one step further: it *checks whether the generated answer is actually supported by the retrieved sources*, and flags hallucinated or unsupported claims. That groundedness layer — not the pipeline — is the point.
+[![CI](https://github.com/nickjlamb/litrag/actions/workflows/ci.yml/badge.svg)](https://github.com/nickjlamb/litrag/actions/workflows/ci.yml)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Website](https://img.shields.io/badge/site-pharmatools.ai%2Flitrag-6f42c1)](https://www.pharmatools.ai/litrag)
 
-Built on **LangChain** (orchestration) + **Hugging Face** `sentence-transformers` (embeddings) + **FAISS** (vector store), so it runs locally with no managed vector-DB key required.
-
-> Status: built. Corpus = 15 real semaglutide abstracts (see `data/`). Retrieval runs
-> locally and is verified; generation + faithfulness judge need an LLM key (see Quickstart).
-
----
-
-## Why this exists
-
-Two things at once:
-
-1. **A faithful RAG reference.** A small, readable pipeline that retrieves from PubMed abstracts and answers questions *with citations*, then verifies those citations hold up.
-2. **An honest framework comparison.** The pipeline is implemented in LangChain; the README documents how the same retrieval would look in LlamaIndex, and where each framework's abstraction helps vs. gets in the way. (See [Framework notes](#framework-notes-langchain-vs-llamaindex).)
-
-The groundedness eval reuses the citation-faithfulness approach from a separate cookbook notebook: locate the cited quote in the source deterministically, then use an LLM-as-judge to grade whether the source *supports* the claim (supports / partial / contradicts / not-found).
+</div>
 
 ---
+
+Most RAG demos stop at "it retrieved something and wrote an answer." LitRAG goes one step further: **it checks whether the generated answer is actually supported by the retrieved sources**, and flags hallucinated or unsupported claims. That groundedness layer — not the pipeline — is the point.
+
+The model must return, for every claim it makes, a **verbatim quote** from a retrieved passage plus the PMID it came from. A two-stage eval then verifies each citation:
+
+1. **Locate** — a deterministic string check (normalize + fuzzy match) confirms the quote really exists in the source. A fabricated quote is caught here, for free, before any judge is called.
+2. **Judge** — an LLM-as-judge grades whether the located passage actually *supports* the claim: `supports` / `partial` / `contradicts` / `not_found`.
+
+Embedding and retrieval run fully local (Hugging Face `sentence-transformers` + FAISS — no managed vector-DB key). Only generation and the judge call an LLM API.
 
 ## Architecture
 
+```mermaid
+flowchart TB
+    subgraph local["Local — no API key required"]
+        A[PubMed abstracts<br/><code>data/</code>] --> B[Chunk + attach<br/><code>pmid / title / source</code>]
+        B --> C[sentence-transformers<br/>embeddings]
+        C --> D[(FAISS index)]
+        Q([Question]) --> R[Retrieve top-k]
+        D --> R
+    end
+
+    subgraph api["LLM API"]
+        R --> G["Generate structured answer<br/><code>{answer, claims:[{text, cited_quote, source}]}</code>"]
+        G --> L{"Stage 1 — Locate quote<br/>in retrieved source<br/><i>(deterministic, fuzzy match)</i>"}
+        L -- "not found" --> H[/"hallucinated_quote<br/>flagged, no judge call"/]
+        L -- found --> J["Stage 2 — LLM-as-judge<br/>supports / partial /<br/>contradicts / not_found"]
+        J --> V[/"per-claim verdict +<br/>overall grounded flag"/]
+    end
+
+    style H fill:#fdd,stroke:#c33
+    style V fill:#dfd,stroke:#3a3
 ```
-PubMed abstracts ──▶ chunk ──▶ HF sentence-transformers embeddings ──▶ FAISS index
-                                                                          │
-                              question ──▶ retrieve top-k ──────────────┘
-                                              │
-                                              ▼
-                                   LangChain RAG chain (Claude / OpenAI)
-                                              │
-                                              ▼
-                                   answer + cited passages
-                                              │
-                                              ▼
-                              citation-faithfulness eval  ──▶  grounded? / flagged claims
-```
 
-## Layout
+Built on [LangChain](https://python.langchain.com/) (orchestration), [Hugging Face sentence-transformers](https://www.sbert.net/) (embeddings), and [FAISS](https://github.com/facebookresearch/faiss) (vector store). The judge deliberately drops to the raw [Anthropic SDK](https://github.com/anthropics/anthropic-sdk-python) for forced tool use and prompt caching — see [Framework notes](docs/framework-notes.md) for why.
 
-| File | Role |
-|------|------|
-| `ingest.py` | Load the abstract corpus, chunk into passages with source metadata |
-| `index.py` | Build/load the FAISS index from HF `sentence-transformers` embeddings |
-| `rag.py` | LangChain retrieval + generation chain; returns answer **with** cited passages |
-| `faithfulness.py` | Citation-faithfulness eval — locate quote in source, LLM-judge support level |
-| `demo.py` | End-to-end run: ingest → index → ask → answer → grade |
-| `data/` | Sample PubMed abstracts (static sample so the repo runs key-free for retrieval) |
-
-## Quickstart (after build)
+## Quick start
 
 ```bash
+git clone https://github.com/nickjlamb/litrag.git && cd litrag
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # add ANTHROPIC_API_KEY (or OPENAI_API_KEY) for the generation + judge steps
+cp .env.example .env       # add ANTHROPIC_API_KEY for generation + judge
 python demo.py
 ```
 
-Embedding + retrieval run fully local (HF + FAISS); only generation and the faithfulness judge call an LLM API.
+The demo ingests a corpus of 15 real semaglutide abstracts, builds the FAISS index (first run downloads the ~90 MB embedding model, then it's offline), asks three questions — two answerable from the corpus, one deliberately *not* — and grades every claim (output abridged):
 
----
+```text
+================================================================================
+Q1: By how much does semaglutide reduce major adverse cardiovascular events ...
+================================================================================
 
-## Build plan (for the build session)
+ANSWER: In adults with overweight or obesity and established cardiovascular
+disease but without diabetes, semaglutide reduced major adverse cardiovascular
+events by 20% versus placebo (hazard ratio 0.80; 95% CI 0.72–0.90). ...
 
-Implement in this order — each step is independently runnable:
+  Retrieved: 37952131, 38740993, 33567185, 34706925
+  Faithfulness: GROUNDED  (3 claims, 0 flagged)
+    [OK ] supported        [PMID 37952131] Semaglutide reduced MACE by 20% vs placebo
+    ...
 
-1. **`ingest.py`** — load `data/sample_abstracts.*`, chunk to ~512-token passages, attach `{pmid, title, source}` metadata. (Optional: a `--from-pubcrawl` path that pulls fresh abstracts via the PubCrawl MCP server instead of the static sample.)
-2. **`index.py`** — embed passages with `langchain_huggingface.HuggingFaceEmbeddings` (model e.g. `sentence-transformers/all-MiniLM-L6-v2`), build a `langchain_community.vectorstores.FAISS` index, save/load from disk.
-3. **`rag.py`** — a LangChain retrieval chain (`chat model` = `langchain_anthropic.ChatAnthropic` with `claude-sonnet-4-6`, or `langchain_openai`), prompted to answer **and quote the supporting passage per claim**. Return structured `{answer, claims:[{text, cited_quote, source}]}`.
-4. **`faithfulness.py`** — for each claim: locate `cited_quote` in the retrieved source (normalize + `rapidfuzz.partial_ratio`); if found, LLM-judge support level (supports/partial/contradicts/not-found). Short-circuit to "hallucinated quote" if the quote isn't locatable. (Port the logic from the cookbook `citation_faithfulness.py`.)
-5. **`demo.py`** — wire it end-to-end on 2–3 example questions; print answer + per-claim grounded verdict.
-6. **Tests** — a couple of unit tests on the quote-locator (exact hit, fuzzy hit, fabricated quote → not found).
-7. **Fill in [Framework notes](#framework-notes-langchain-vs-llamaindex)** from the actual build experience — be specific about where LangChain's abstraction earned its keep and where it cost a layer of indirection.
+================================================================================
+Q3: Does semaglutide reduce the risk of dementia or cognitive decline?
+================================================================================
 
-Keep it small. A reviewer should be able to read the whole thing in ten minutes.
-
----
-
-## Framework notes (LangChain vs. LlamaIndex)
-
-_Written from the build, not the docs._
-
-**What LangChain bought.**
-
-- **`Document` + metadata as the universal currency.** `ingest.py` emits
-  `Document(page_content, metadata={pmid, title, source})`; FAISS embeds it, the
-  retriever returns it, and the `{pmid, title, source}` rides through embedding and
-  retrieval untouched. The faithfulness eval needs exactly that provenance, and the
-  framework carried it end-to-end for free — no parallel bookkeeping of "which text
-  came from which abstract."
-- **Swappable embedder + LLM.** `HuggingFaceEmbeddings` and `ChatAnthropic` are drop-in;
-  switching the judge/generator to OpenAI is a one-line import change. The local
-  embedder and the API generator sit behind the same interfaces.
-- **`with_structured_output(PydanticModel)`.** This is the biggest win for *this*
-  pipeline. Structured per-claim citations (`{answer, claims:[{text, cited_quote,
-  source}]}`) are the whole point, and I got validated objects back without hand-writing
-  a tool schema or a parser — just a Pydantic model.
-- **FAISS persistence.** `from_documents` / `save_local` / `load_local` gave embed-once,
-  reuse-after for nothing (see `index.get_or_build_index`).
-
-**Where it added indirection.**
-
-- **LCEL composition is clean until you debug it.** `{"context": retriever | format,
-  "question": passthrough} | prompt | structured` reads well, but the dict→Runnable
-  coercion is opaque: drop a non-`Runnable` into that dict and you get a cryptic
-  `Expected a Runnable, callable or dict` from deep in `coerce_to_runnable`, far from
-  the line you wrote. (Hit this verbatim while wiring a test stub.)
-- **The judge left the framework on purpose.** `faithfulness.grade_support` uses the raw
-  Anthropic SDK, not LangChain — because it wants *forced* tool use **and**
-  `cache_control` on the source-passage content block (so checking many claims against
-  one long abstract reuses the cached passage). `with_structured_output` abstracts the
-  tool away, but it also abstracts away per-block cache control — so the one place I most
-  wanted provider-specific control is the place I dropped out of the abstraction. That's
-  the honest seam.
-- **`HuggingFaceEmbeddings` is a thin wrapper.** For a corpus this small you could call
-  `sentence-transformers` + `faiss` directly in ~20 lines and lose almost nothing.
-
-### LitRAG in LlamaIndex — a design read
-
-_I built the pipeline in LangChain; this section is how I'd map it onto LlamaIndex and
-the trade-offs I'd expect — **not** a second, shipped implementation. Kept deliberately
-separate from the build notes above, which are from the build._
-
-Retrieve-then-generate collapses to roughly:
-
-```python
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
-index = VectorStoreIndex.from_documents(SimpleDirectoryReader("data/").load_data())
-print(index.as_query_engine().query("How much weight loss with semaglutide?"))
+ANSWER: The provided passages do not address dementia or cognitive decline. ...
+  Faithfulness: GROUNDED  (0 claims, 0 flagged)   # honest abstention — no invented support
 ```
 
-Mapping LitRAG's pieces onto LlamaIndex primitives:
+**No API key?** Retrieval works without one:
 
-| LitRAG (LangChain) | LlamaIndex equivalent |
-|--------------------|-----------------------|
-| `Document(page_content, metadata={pmid, title, source})` | `TextNode` + `metadata`, with `excluded_embed_metadata_keys` to keep PMIDs out of the embedded text |
-| `ingest.chunk` (word-window splitter) | a `SentenceSplitter` / `TokenTextSplitter` node parser |
-| `HuggingFaceEmbeddings` | `HuggingFaceEmbedding` (same sentence-transformers model) |
-| `FAISS.from_documents` | `VectorStoreIndex` over a `FaissVectorStore` |
-| `store.as_retriever(search_kwargs={"k": 4})` | `index.as_retriever(similarity_top_k=4)` |
-| `llm.with_structured_output(StructuredAnswer)` | `index.as_query_engine(output_cls=StructuredAnswer)` (Pydantic program) |
-| hand-rolled per-claim `cited_quote` contract | `CitationQueryEngine` — citations are first-class; the response carries `source_nodes` |
+```bash
+python index.py    # builds the index and runs a sample similarity search, fully local
+```
 
-**What it would buy.** Citation is native. `CitationQueryEngine` numbers its sources and
-hands back the `source_nodes` it used, so "answer with provenance" isn't something I bolt
-on with a Pydantic schema — it's the default contract. For a product whose entire point
-is grounded citations, that's a genuine fit advantage.
+## Examples
 
-**What would stay exactly the same.** The faithfulness judge. `faithfulness.grade_support`
-would still drop to the raw Anthropic SDK for *forced* tool use + `cache_control` on the
-passage — LlamaIndex abstracts those away just as LangChain does. The honest seam
-(framework for retrieval, SDK for the eval that *is* the product) is identical either
-way; the framework choice only ever touches the boring 80%.
+Runnable, focused scripts live in [`examples/`](examples/):
 
-**What it would cost.** A second embedding/index stack to maintain, and — the real catch —
-LlamaIndex's citation synthesizer re-chunks and renumbers sources its own way, which
-fights the contract the eval depends on. The locator needs the model to quote a span
-*verbatim* from a retrieved passage; a synthesizer that paraphrases into a numbered
-citation breaks `locate_quote` before the judge ever runs. Reconciling first-class
-citations with a verbatim-quote requirement is non-trivial, and it's the main reason
-swapping frameworks isn't a free lunch here.
+| Example | What it shows | API key |
+|---|---|---|
+| [`01_retrieval_only.py`](examples/01_retrieval_only.py) | Build/load the index and inspect top-k passages for a query | none |
+| [`02_ask_with_citations.py`](examples/02_ask_with_citations.py) | One question end-to-end: structured answer with per-claim verbatim quotes | required |
+| [`03_catch_a_hallucination.py`](examples/03_catch_a_hallucination.py) | Feed the eval a fabricated citation and watch Stage 1 flag it — no judge call needed | none |
+| [`04_bring_your_own_corpus.py`](examples/04_bring_your_own_corpus.py) | Point the pipeline at your own abstracts file | none for retrieval |
 
-**Honest status.** Not built. If the LlamaIndex equivalent matters for a given purpose,
-the right move is a small `rag_llamaindex.py` variant — code, not more prose.
+## Project layout
 
-**The honest takeaway.** For a 5-file pipeline the framework earns its place on the
-*glue* — the `Document`/metadata plumbing and `with_structured_output` — and costs a
-layer exactly where the product lives: the faithfulness judge, which I built on the
-Anthropic SDK directly for forced tool use + caching. Neither framework touches the two
-things that make this repo more than a demo (the per-claim `cited_quote` contract and the
-two-stage groundedness check) — those are plain Pydantic + the SDK. So: reach for the
-framework for the boring 80% (load → embed → retrieve → structure); drop to the SDK for
-the 20% that *is* the point. If retrieval-with-citations were the whole product,
-LlamaIndex would be the better-fitting default at this size.
+| File | Role |
+|------|------|
+| [`ingest.py`](ingest.py) | Load the abstract corpus, chunk into passages with `{pmid, title, source}` metadata |
+| [`index.py`](index.py) | Build/load the FAISS index from `sentence-transformers` embeddings |
+| [`rag.py`](rag.py) | LangChain retrieval + generation chain; returns the answer **with** per-claim cited quotes |
+| [`faithfulness.py`](faithfulness.py) | Two-stage citation-faithfulness eval: deterministic quote locator → LLM-as-judge |
+| [`demo.py`](demo.py) | End-to-end run: ingest → index → ask → answer → grade |
+| [`data/`](data/) | 15 real semaglutide abstracts (STEP, SELECT, SUSTAIN…) so the repo runs key-free for retrieval |
 
----
+A reviewer can read the whole pipeline in about ten minutes — that's deliberate.
+
+## Why the eval is two-stage
+
+A single LLM-as-judge can be argued with; a string match can't. Requiring a verbatim quote per claim turns hallucination detection into two cheap, complementary checks:
+
+- **The locator is unspoofable.** If the model invents a quote, `rapidfuzz.partial_ratio` against the retrieved passages fails, and the claim is flagged as `hallucinated_quote` without spending a judge call. Paraphrases below the 90-point threshold are rejected too — verbatim means verbatim.
+- **The judge grades only from the passage.** With the quote located, the judge answers a narrower, easier question: does *this passage* support *this claim*? It's forbidden from using outside knowledge, forced into a structured verdict via tool use, and the passage block is prompt-cached so grading many claims against one source is cheap.
+
+An answer that honestly abstains ("the sources don't say") makes no claims and is grounded by definition.
+
+## Framework notes
+
+The pipeline is implemented in LangChain; [docs/framework-notes.md](docs/framework-notes.md) is an honest, from-the-build write-up of where the framework earned its keep (`Document` metadata plumbing, `with_structured_output`) and where the project dropped to the raw SDK on purpose (the judge needs forced tool use + per-block prompt caching that the abstraction hides). It also maps the design onto LlamaIndex primitive-by-primitive and explains why swapping frameworks isn't a free lunch here.
+
+## Roadmap
+
+- [ ] **Live corpus ingestion** — pull fresh abstracts from PubMed via NCBI E-utilities / the [PubCrawl](https://www.pharmatools.ai/pubcrawl) MCP server instead of the static sample
+- [ ] **LlamaIndex variant** — a small `rag_llamaindex.py` so the framework comparison is code, not prose
+- [ ] **Benchmark the eval** — score the faithfulness judge against RAGAS and DeepEval faithfulness metrics on a labelled claim set
+- [ ] **Larger corpora** — beyond one drug: multi-topic corpora and retrieval quality metrics (recall@k against known-relevant PMIDs)
+- [ ] **CLI** — `litrag ask "..."` entry point with `--corpus` and `--judge` flags
+
+Suggestions welcome — open an [issue](https://github.com/nickjlamb/litrag/issues).
+
+## Contributing
+
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup, test and lint commands, and PR guidelines. Notable changes are tracked in [CHANGELOG.md](CHANGELOG.md).
+
+```bash
+pip install -r requirements.txt && pip install ruff
+pytest            # quote-locator tests run without any API key
+ruff check .
+```
+
+## Citation
+
+If you use LitRAG in your work, please cite it (see [`CITATION.cff`](CITATION.cff)):
+
+```bibtex
+@software{lamb_litrag_2026,
+  author = {Lamb, Nick},
+  title  = {LitRAG: grounded literature RAG with a citation-faithfulness eval},
+  year   = {2026},
+  url    = {https://github.com/nickjlamb/litrag}
+}
+```
 
 ## License
 
-MIT © 2026 Nick Lamb
+[MIT](LICENSE) © 2026 [Nick Lamb](https://www.pharmatools.ai)
