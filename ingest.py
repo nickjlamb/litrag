@@ -142,7 +142,7 @@ def load_from_pubcrawl(query: str, max_results: int = 15) -> list[Record]:
     eutils = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
     def _get(url: str) -> bytes:
-        with urllib.request.urlopen(url, timeout=30) as resp:  # noqa: S310 (trusted host)
+        with urllib.request.urlopen(url, timeout=30) as resp:  # trusted host (NCBI)
             return resp.read()
 
     # 1. esearch -> PMIDs

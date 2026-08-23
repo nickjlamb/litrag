@@ -18,11 +18,15 @@ from ingest import load_documents
 
 EXAMPLE_QUESTIONS = [
     # Answerable from the SELECT abstract (PMID 37952131 / 38740993).
-    "By how much does semaglutide reduce major adverse cardiovascular events in adults "
-    "with obesity but without diabetes?",
+    (
+        "By how much does semaglutide reduce major adverse cardiovascular events in adults "
+        "with obesity but without diabetes?"
+    ),
     # Answerable from STEP 1 (PMID 33567185).
-    "How much weight do adults with overweight or obesity lose on once-weekly "
-    "semaglutide 2.4 mg, and what are the most common adverse events?",
+    (
+        "How much weight do adults with overweight or obesity lose on once-weekly "
+        "semaglutide 2.4 mg, and what are the most common adverse events?"
+    ),
     # Deliberately NOT answerable from the corpus — no abstract covers dementia.
     # The eval should catch any claim the model invents here.
     "Does semaglutide reduce the risk of dementia or cognitive decline?",

@@ -34,9 +34,11 @@ PROMPT = ChatPromptTemplate.from_messages(
         ("system", SYSTEM),
         (
             "human",
-            "PASSAGES:\n{context}\n\n"
-            "QUESTION: {question}\n\n"
-            "Answer the question and return structured claims with verbatim cited quotes.",
+            (
+                "PASSAGES:\n{context}\n\n"
+                "QUESTION: {question}\n\n"
+                "Answer the question and return structured claims with verbatim cited quotes."
+            ),
         ),
     ]
 )

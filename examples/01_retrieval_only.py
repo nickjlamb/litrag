@@ -14,8 +14,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from index import get_or_build_index  # noqa: E402
-from ingest import load_documents  # noqa: E402
+from index import get_or_build_index
+from ingest import load_documents
 
 DEFAULT_QUERY = "Does semaglutide reduce cardiovascular events?"
 

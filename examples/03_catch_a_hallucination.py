@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from faithfulness import locate  # noqa: E402
+from faithfulness import locate
 
 SOURCE = (
     "A primary cardiovascular end-point event occurred in 569 of the 8803 patients "

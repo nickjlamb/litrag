@@ -1,0 +1,16 @@
+# Explicit rule set so local runs and CI agree regardless of ruff version.
+target-version = "py310"
+
+[lint]
+select = [
+    "E4",     # imports
+    "E7",     # statements
+    "E9",     # runtime errors
+    "F",      # pyflakes
+    "ISC",    # implicit string concatenation
+    "RUF100", # unused noqa directives
+]
+
+[lint.per-file-ignores]
+# Examples insert the repo root on sys.path before importing project modules.
+"examples/*" = ["E402"]
