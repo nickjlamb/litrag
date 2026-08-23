@@ -30,8 +30,6 @@ Embedding and retrieval run fully local (Hugging Face `sentence-transformers` + 
   <img src="docs/architecture-light.svg" alt="LitRAG architecture: a local ingest and retrieval stage (corpus → passages with provenance → FAISS) feeds an LLM generation step whose every claim carries a verbatim quote; each claim then passes a two-stage faithfulness eval — a deterministic quote locator that flags fabricated quotes without a judge call, then an LLM-as-judge that grades support from the passage only." width="100%">
 </picture>
 
-<sub>Diagram source lives in [`docs/gen_diagram.py`](docs/gen_diagram.py) — edit and re-run to regenerate both theme variants.</sub>
-
 Built on [LangChain](https://python.langchain.com/) (orchestration), [Hugging Face sentence-transformers](https://www.sbert.net/) (embeddings), and [FAISS](https://github.com/facebookresearch/faiss) (vector store). The judge deliberately drops to the raw [Anthropic SDK](https://github.com/anthropics/anthropic-sdk-python) for forced tool use and prompt caching — see [Framework notes](docs/framework-notes.md) for why.
 
 ## Quick start
