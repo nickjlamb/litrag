@@ -25,27 +25,12 @@ Embedding and retrieval run fully local (Hugging Face `sentence-transformers` + 
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    subgraph local["Local — no API key required"]
-        A[PubMed abstracts<br/><code>data/</code>] --> B[Chunk + attach<br/><code>pmid / title / source</code>]
-        B --> C[sentence-transformers<br/>embeddings]
-        C --> D[(FAISS index)]
-        Q([Question]) --> R[Retrieve top-k]
-        D --> R
-    end
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture-dark.svg">
+  <img src="docs/architecture-light.svg" alt="LitRAG architecture: a local ingest and retrieval stage (corpus → passages with provenance → FAISS) feeds an LLM generation step whose every claim carries a verbatim quote; each claim then passes a two-stage faithfulness eval — a deterministic quote locator that flags fabricated quotes without a judge call, then an LLM-as-judge that grades support from the passage only." width="100%">
+</picture>
 
-    subgraph api["LLM API"]
-        R --> G["Generate structured answer<br/><code>{answer, claims:[{text, cited_quote, source}]}</code>"]
-        G --> L{"Stage 1 — Locate quote<br/>in retrieved source<br/><i>(deterministic, fuzzy match)</i>"}
-        L -- "not found" --> H[/"hallucinated_quote<br/>flagged, no judge call"/]
-        L -- found --> J["Stage 2 — LLM-as-judge<br/>supports / partial /<br/>contradicts / not_found"]
-        J --> V[/"per-claim verdict +<br/>overall grounded flag"/]
-    end
-
-    style H fill:#fdd,stroke:#c33
-    style V fill:#dfd,stroke:#3a3
-```
+<sub>Diagram source lives in [`docs/gen_diagram.py`](docs/gen_diagram.py) — edit and re-run to regenerate both theme variants.</sub>
 
 Built on [LangChain](https://python.langchain.com/) (orchestration), [Hugging Face sentence-transformers](https://www.sbert.net/) (embeddings), and [FAISS](https://github.com/facebookresearch/faiss) (vector store). The judge deliberately drops to the raw [Anthropic SDK](https://github.com/anthropics/anthropic-sdk-python) for forced tool use and prompt caching — see [Framework notes](docs/framework-notes.md) for why.
 

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" role="img" aria-label="LitRAG architecture: a local ingest and retrieval stage feeds an LLM generation step whose every claim passes a two-stage citation-faithfulness eval — a deterministic quote locator, then an LLM-as-judge.">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#767d86"/></marker><marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f85149"/></marker><marker id="arr-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3fb950"/></marker></defs>
+<rect x="16" y="52" width="384" height="432" rx="12" fill="#151b23" stroke="#3d444d"/>
+<text x="34" y="78" font-size="11" font-weight="600" letter-spacing="1.5" fill="#9198a1">LOCAL &#183; NO API KEY REQUIRED</text>
+<rect x="76.0" y="92" width="264" height="52" rx="8" fill="#212830" stroke="#3d444d"/>
+<text x="208" y="114" font-size="13" font-weight="600" text-anchor="middle" fill="#e6edf3">PubMed abstracts</text>
+<text x="208" y="132" font-size="11" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" text-anchor="middle" fill="#9198a1">data/ &#183; 15 real trial abstracts</text>
+<line x1="208" y1="144" x2="208" y2="176" stroke="#767d86" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="216" y="164.0" font-size="11" fill="#9198a1">chunk</text>
+<rect x="76.0" y="178" width="264" height="52" rx="8" fill="#212830" stroke="#3d444d"/>
+<text x="208" y="200" font-size="13" font-weight="600" text-anchor="middle" fill="#e6edf3">Passages + provenance</text>
+<text x="208" y="218" font-size="10.5" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace" text-anchor="middle" fill="#9198a1">{pmid, title, source}</text>
+<line x1="208" y1="230" x2="208" y2="262" stroke="#767d86" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="216" y="250.0" font-size="11" fill="#9198a1">embed &#183; MiniLM, local</text>
+<path d="M 118 275 v 34 a 90 9 0 0 0 180 0 v -34" fill="#212830" stroke="#3d444d"/>
+<ellipse cx="208" cy="275" rx="90" ry="9" fill="#212830" stroke="#3d444d"/>
+<text x="208" y="302" font-size="13" font-weight="600" text-anchor="middle" fill="#e6edf3">FAISS index</text>
+<rect x="40.0" y="392" width="132" height="40" rx="8" fill="#212830" stroke="#3d444d"/>
+<text x="106" y="416.5" font-size="13" font-weight="600" text-anchor="middle" fill="#e6edf3">Question</text>
+<rect x="220.0" y="392" width="160" height="40" rx="8" fill="#212830" stroke="#3d444d"/>
+<text x="300" y="416.5" font-size="13" font-weight="600" text-anchor="middle" fill="#e6edf3">Retrieve top-k</text>
+<polyline points="208,318 208,370 300,370 300,389" fill="none" stroke="#767d86" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="216" y="364" font-size="11" fill="#9198a1">similarity search</text>
+<line x1="172" y1="412" x2="217" y2="412" stroke="#767d86" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="416" y="52" width="528" height="432" rx="12" fill="#151b23" stroke="#3d444d"/>
+<text x="434" y="78" font-size="11" font-weight="600" letter-spacing="1.5" fill="#9198a1">LLM API</text>
+<rect x="490.0" y="92" width="400" height="52" rx="8" fill="#2a2139" stroke="#ab7df8"/>
+<text x="690" y="114" font-size="13" font-weight="600" text-anchor="middle" fill="#ab7df8">Generate structured answer</text>
+<text x="690" y="132" font-size="10.5" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace" text-anchor="middle" fill="#9198a1">{answer, claims:[{text, cited_quote, source}]}</text>
+<polyline points="380,412 450,412 450,118 487,118" fill="none" stroke="#767d86" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="442" y="265" font-size="11" fill="#9198a1" text-anchor="middle" transform="rotate(-90 442 265)">top-k passages + provenance</text>
+<line x1="690" y1="144" x2="690" y2="194" stroke="#767d86" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="700" y="173.0" font-size="11" fill="#9198a1">every claim, with its verbatim quote</text>
+<rect x="490.0" y="196" width="400" height="52" rx="8" fill="#212830" stroke="#3d444d"/>
+<text x="690" y="218" font-size="13" font-weight="600" text-anchor="middle" fill="#e6edf3">Stage 1 &#183; Locate the quote</text>
+<text x="690" y="236" font-size="11" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" text-anchor="middle" fill="#9198a1">exact + fuzzy match in the retrieved source &#8212; deterministic</text>
+<polyline points="600,248 600,270 560,270 560,303" fill="none" stroke="#f85149" stroke-width="1.5" marker-end="url(#arr-red)"/>
+<text x="494" y="292" font-size="11" font-weight="600" fill="#f85149">not found</text>
+<polyline points="780,248 780,270 810,270 810,303" fill="none" stroke="#767d86" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="822" y="292" font-size="11" fill="#9198a1">located</text>
+<rect x="452.0" y="306" width="216" height="52" rx="8" fill="#3c1618" stroke="#6e2a2c"/>
+<text x="560" y="328" font-size="13" font-weight="600" text-anchor="middle" fill="#f85149">hallucinated_quote</text>
+<text x="560" y="346" font-size="11" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" text-anchor="middle" fill="#9198a1">flagged &#8212; no judge call spent</text>
+<rect x="700.0" y="306" width="220" height="52" rx="8" fill="#212830" stroke="#3d444d"/>
+<text x="810" y="328" font-size="13" font-weight="600" text-anchor="middle" fill="#e6edf3">Stage 2 &#183; LLM-as-judge</text>
+<text x="810" y="346" font-size="11" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" text-anchor="middle" fill="#9198a1">grades from the passage only</text>
+<line x1="810" y1="358" x2="810" y2="396" stroke="#767d86" stroke-width="1.5" marker-end="url(#arr-green)"/>
+<rect x="688.0" y="398" width="244" height="52" rx="8" fill="#122117" stroke="#2b5233"/>
+<text x="810" y="420" font-size="13" font-weight="600" text-anchor="middle" fill="#3fb950">Verdict + grounded flag</text>
+<text x="810" y="438" font-size="11" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" text-anchor="middle" fill="#9198a1">supports &#183; partial &#183; contradicts &#183; not_found</text>
+</svg>
