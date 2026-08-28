@@ -8,6 +8,10 @@ langchain-huggingface
 sentence-transformers
 faiss-cpu
 
+# Live corpus ingestion — client for the PubCrawl MCP server
+# (server install: npm install -g @pharmatools/pubcrawl)
+mcp
+
 # LLM client + eval helpers
 anthropic
 rapidfuzz

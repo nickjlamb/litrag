@@ -16,3 +16,4 @@ faiss_index/
 
 # OS
 .DS_Store
+.claude/

@@ -72,6 +72,22 @@ ANSWER: The provided passages do not address dementia or cognitive decline. ...
 python index.py    # builds the index and runs a sample similarity search, fully local
 ```
 
+## Live ingestion via PubCrawl
+
+The static sample corpus is only the starting point. `ingest.py` can pull fresh abstracts straight from PubMed through the [PubCrawl](https://www.pharmatools.ai/pubcrawl) MCP server — our own literature tool (`search_pubmed` → `get_abstract`, no API key):
+
+```bash
+npm install -g @pharmatools/pubcrawl   # one-time; ingest.py spawns it over stdio
+
+python ingest.py --from-pubcrawl "GLP-1 agonists chronic kidney disease" \
+    --max-results 15 --save data/glp1_ckd.md
+python demo.py   # or: load_documents(path="data/glp1_ckd.md")
+```
+
+The pulled corpus is written in the same documented `## PMID:` / `**Title:**` / `**Source:**` format as the sample, so it's a drop-in replacement anywhere the pipeline takes a corpus path. No Node? `--via eutils` fetches directly from NCBI E-utilities instead.
+
+NCBI rate-limits E-utilities to 3 requests/second without a key; ingestion retries transient 429s with backoff automatically. For the 10 req/s tier, get a free key from your [NCBI account](https://www.ncbi.nlm.nih.gov/account/settings/) and `export NCBI_API_KEY=...` — it's forwarded to the PubCrawl server.
+
 ## Examples
 
 Runnable, focused scripts live in [`examples/`](examples/):
@@ -111,7 +127,7 @@ The pipeline is implemented in LangChain; [docs/framework-notes.md](docs/framewo
 
 ## Roadmap
 
-- [ ] **Live corpus ingestion** — pull fresh abstracts from PubMed via NCBI E-utilities / the [PubCrawl](https://www.pharmatools.ai/pubcrawl) MCP server instead of the static sample
+- [x] **Live corpus ingestion** — pull fresh abstracts from PubMed via the [PubCrawl](https://www.pharmatools.ai/pubcrawl) MCP server (with an NCBI E-utilities fallback) instead of the static sample — see [Live ingestion via PubCrawl](#live-ingestion-via-pubcrawl)
 - [ ] **LlamaIndex variant** — a small `rag_llamaindex.py` so the framework comparison is code, not prose
 - [ ] **Benchmark the eval** — score the faithfulness judge against RAGAS and DeepEval faithfulness metrics on a labelled claim set
 - [ ] **Larger corpora** — beyond one drug: multi-topic corpora and retrieval quality metrics (recall@k against known-relevant PMIDs)

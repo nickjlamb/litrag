@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- **Live corpus ingestion via the PubCrawl MCP server** (`ingest.py`): `load_from_pubcrawl` now talks to [PubCrawl](https://www.pharmatools.ai/pubcrawl) over stdio using the official `mcp` client (`search_pubmed` → `get_abstract`), with the previous direct NCBI E-utilities path kept as an explicit `via="eutils"` fallback. New `save_corpus` writes pulled abstracts in the documented corpus format, and the CLI gains `--via`, `--max-results`, and `--save`. Transient NCBI 429 rate-limit errors are retried with exponential backoff, and `NCBI_API_KEY` is forwarded to the spawned server for the higher request tier. Adds the `mcp` package as a dependency; the server itself installs with `npm install -g @pharmatools/pubcrawl`.
+
 ## [0.1.0] - 2026-08-23
 
 First tagged release.
