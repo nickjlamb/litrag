@@ -121,6 +121,18 @@ A single LLM-as-judge can be argued with; a string match can't. Requiring a verb
 
 An answer that honestly abstains ("the sources don't say") makes no claims and is grounded by definition.
 
+## How it benchmarks
+
+Scored against the faithfulness metrics of RAGAS and DeepEval on a 61-claim hand-labelled set over the sample corpus, with the same Claude judge model for all three systems (methodology, error analysis, and caveats in [`benchmark/`](benchmark/)):
+
+| | LitRAG | RAGAS | DeepEval |
+|---|---|---|---|
+| Accuracy | **0.984** | 0.934 | 0.803 |
+| Hallucination recall | **1.000** | 0.912 | 0.647 |
+| Wall time (61 claims) | **177 s** | 355 s | 863 s |
+
+The separating case is a *true* claim citing a *fabricated* quote: both frameworks pass it with a perfect score, because they judge the claim and never see the citation. The deterministic locator flags it without spending a judge call.
+
 ## Framework notes
 
 The pipeline is implemented in LangChain; [docs/framework-notes.md](docs/framework-notes.md) is an honest, from-the-build write-up of where the framework earned its keep (`Document` metadata plumbing, `with_structured_output`) and where the project dropped to the raw SDK on purpose (the judge needs forced tool use + per-block prompt caching that the abstraction hides). It also maps the design onto LlamaIndex primitive-by-primitive and explains why swapping frameworks isn't a free lunch here.
@@ -129,7 +141,7 @@ The pipeline is implemented in LangChain; [docs/framework-notes.md](docs/framewo
 
 - [x] **Live corpus ingestion** — pull fresh abstracts from PubMed via the [PubCrawl](https://www.pharmatools.ai/pubcrawl) MCP server (with an NCBI E-utilities fallback) instead of the static sample — see [Live ingestion via PubCrawl](#live-ingestion-via-pubcrawl)
 - [ ] **LlamaIndex variant** — a small `rag_llamaindex.py` so the framework comparison is code, not prose
-- [ ] **Benchmark the eval** — score the faithfulness judge against RAGAS and DeepEval faithfulness metrics on a labelled claim set
+- [x] **Benchmark the eval** — score the faithfulness judge against RAGAS and DeepEval faithfulness metrics on a labelled claim set — see [benchmark/](benchmark/) and [How it benchmarks](#how-it-benchmarks)
 - [ ] **Larger corpora** — beyond one drug: multi-topic corpora and retrieval quality metrics (recall@k against known-relevant PMIDs)
 - [ ] **CLI** — `litrag ask "..."` entry point with `--corpus` and `--judge` flags
 

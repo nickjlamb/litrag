@@ -1,0 +1,795 @@
+{
+  "config": {
+    "systems": "ragas,deepeval",
+    "limit": null,
+    "threshold": 0.5,
+    "allow_partial": false,
+    "with_quote": false,
+    "dry_run": false,
+    "out": "/Users/NickLamb/litrag/benchmark/results",
+    "judge_model": "claude-sonnet-4-6",
+    "n_claims": 61
+  },
+  "systems": {
+    "ragas": {
+      "summary": {
+        "n_scored": 0,
+        "errors": 61,
+        "accuracy": 0.0,
+        "hallucination_precision": 0.0,
+        "hallucination_recall": 0.0,
+        "hallucination_f1": 0.0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "per_category_accuracy": {},
+        "total_seconds": 52.1
+      },
+      "predictions": [
+        {
+          "id": "c01",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZnqHcieTbJ6TkotyCi'}",
+          "seconds": 0.96
+        },
+        {
+          "id": "c02",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZntnhvb2SZsMGD8tUF'}",
+          "seconds": 1.02
+        },
+        {
+          "id": "c03",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZnyKomzSJ6F1gB7MYF'}",
+          "seconds": 0.84
+        },
+        {
+          "id": "c04",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZo2yaeY5VzchrgfEE9'}",
+          "seconds": 0.88
+        },
+        {
+          "id": "c05",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZo77ckAqMaUbyimhNk'}",
+          "seconds": 0.98
+        },
+        {
+          "id": "c06",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZoAhBDRVq2rjnPjw9W'}",
+          "seconds": 0.8
+        },
+        {
+          "id": "c07",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZoE8YoDkQkkW6u8Bif'}",
+          "seconds": 0.81
+        },
+        {
+          "id": "c08",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZoHYvrSota75SuYZEQ'}",
+          "seconds": 0.79
+        },
+        {
+          "id": "c09",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZoLyYy8nVakM8BCqSK'}",
+          "seconds": 0.86
+        },
+        {
+          "id": "c10",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZoR48Ckvarcb6hGCw9'}",
+          "seconds": 0.9
+        },
+        {
+          "id": "c11",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZoUqpwtDsZ2khgj9mo'}",
+          "seconds": 0.9
+        },
+        {
+          "id": "c12",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZoYhkUANLoaNTxzHwG'}",
+          "seconds": 0.9
+        },
+        {
+          "id": "c13",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZocK3N6pU4VE6vn4JR'}",
+          "seconds": 0.83
+        },
+        {
+          "id": "c14",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZogCwfCBMqpE1EFQQV'}",
+          "seconds": 1.0
+        },
+        {
+          "id": "c15",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZojvvwhWVDXKEX625C'}",
+          "seconds": 0.78
+        },
+        {
+          "id": "c16",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZooDNwAgDoQwyM9Voi'}",
+          "seconds": 0.8
+        },
+        {
+          "id": "c17",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZortdwCE8QyJ1aHK2y'}",
+          "seconds": 0.91
+        },
+        {
+          "id": "c18",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZow6tRGYh2LJNJfTYi'}",
+          "seconds": 0.96
+        },
+        {
+          "id": "c19",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZp132eGeBDkmLK2GK1'}",
+          "seconds": 0.86
+        },
+        {
+          "id": "c20",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZp4KU7y6C8L5GyDZTG'}",
+          "seconds": 0.83
+        },
+        {
+          "id": "c21",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZp8GqxtMxy2Yy289J8'}",
+          "seconds": 0.97
+        },
+        {
+          "id": "c22",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpC2KbWSX4Z2qce8i4'}",
+          "seconds": 0.79
+        },
+        {
+          "id": "c23",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpFJGg4Xw9t2KFHd5B'}",
+          "seconds": 0.74
+        },
+        {
+          "id": "c24",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpK1WfXXLKXKg3RFHr'}",
+          "seconds": 0.86
+        },
+        {
+          "id": "c25",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpNsgVgxCJ9G8uRMCV'}",
+          "seconds": 0.93
+        },
+        {
+          "id": "c26",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpSTjbw6fVU5KRcRcf'}",
+          "seconds": 0.82
+        },
+        {
+          "id": "c27",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpViCJfZm9kCdHx7aT'}",
+          "seconds": 0.77
+        },
+        {
+          "id": "c28",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpZ2NWFDAwKtD1PTGn'}",
+          "seconds": 0.81
+        },
+        {
+          "id": "c29",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpcawWetnSzu8Yqkre'}",
+          "seconds": 0.8
+        },
+        {
+          "id": "c30",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpgEDTBK6MB76JQz84'}",
+          "seconds": 1.04
+        },
+        {
+          "id": "c31",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpkSU8RvpXW427NhHa'}",
+          "seconds": 0.82
+        },
+        {
+          "id": "c32",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZppmfoCfAvxHwhK5tH'}",
+          "seconds": 0.96
+        },
+        {
+          "id": "c33",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpt4Mxn4arSeV4uw3g'}",
+          "seconds": 0.85
+        },
+        {
+          "id": "c34",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZpwk7WiSGYjwun5971'}",
+          "seconds": 0.85
+        },
+        {
+          "id": "c35",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZq1S7n5LuDKaPib1m8'}",
+          "seconds": 0.82
+        },
+        {
+          "id": "c36",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZq6KJLVcZwddSMbkZn'}",
+          "seconds": 1.11
+        },
+        {
+          "id": "c37",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZq9bFMDbpCChdj5a47'}",
+          "seconds": 0.82
+        },
+        {
+          "id": "c38",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqDNxeS8mejyWsqpW7'}",
+          "seconds": 0.94
+        },
+        {
+          "id": "c39",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqH1VB8n5XUzppUoEE'}",
+          "seconds": 0.76
+        },
+        {
+          "id": "c40",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqNGVmaHwYcduKPWT1'}",
+          "seconds": 1.26
+        },
+        {
+          "id": "c41",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqRicfPjU6yGiND8JW'}",
+          "seconds": 0.75
+        },
+        {
+          "id": "c42",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqV6GYvVjZwkGvorXz'}",
+          "seconds": 0.82
+        },
+        {
+          "id": "c43",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqYLj425zfoVcEfR54'}",
+          "seconds": 0.74
+        },
+        {
+          "id": "c44",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqbaCHcitgpppCbXtC'}",
+          "seconds": 0.79
+        },
+        {
+          "id": "c45",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqeofPnpnu4m2ebEwQ'}",
+          "seconds": 0.76
+        },
+        {
+          "id": "c46",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqiXuAFTAtN9qyifzG'}",
+          "seconds": 0.83
+        },
+        {
+          "id": "c47",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqmmsB2sD8kNZA7F7y'}",
+          "seconds": 0.77
+        },
+        {
+          "id": "c48",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqqGiC6ySseNfUpMGq'}",
+          "seconds": 0.84
+        },
+        {
+          "id": "c49",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqtnYc5FmvxLvs17ej'}",
+          "seconds": 0.85
+        },
+        {
+          "id": "c50",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZqxDupQqTWmoRTVvp7'}",
+          "seconds": 0.76
+        },
+        {
+          "id": "c51",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZr1cZZW9SZ39rYy6LN'}",
+          "seconds": 0.81
+        },
+        {
+          "id": "c52",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZr5A8PWeHstBLDYmea'}",
+          "seconds": 0.9
+        },
+        {
+          "id": "c53",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZr8xaUPX4dFsMgk1g2'}",
+          "seconds": 0.86
+        },
+        {
+          "id": "c54",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZrCVuSJyL9FgGNoWxo'}",
+          "seconds": 0.76
+        },
+        {
+          "id": "c55",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZrGBATmy7dyU1sUfHg'}",
+          "seconds": 0.86
+        },
+        {
+          "id": "c56",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZrKRNjx8xTJhhyXvoV'}",
+          "seconds": 0.76
+        },
+        {
+          "id": "c57",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZrNi4meeZ17k8gWokc'}",
+          "seconds": 0.78
+        },
+        {
+          "id": "c58",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZrS5iXf8oBMMNmteie'}",
+          "seconds": 0.78
+        },
+        {
+          "id": "c59",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZrVV7C5QWfKTXTcjKz'}",
+          "seconds": 0.78
+        },
+        {
+          "id": "c60",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZrYjZtknNPeMWXho3b'}",
+          "seconds": 0.79
+        },
+        {
+          "id": "c61",
+          "pred_faithful": null,
+          "detail": "error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': '`temperature` and `top_p` cannot both be specified for this model. Please use only one.'}, 'request_id': 'req_011CeVZrc6j1gVBko6oGRR3u'}",
+          "seconds": 0.76
+        }
+      ]
+    },
+    "deepeval": {
+      "summary": {
+        "n_scored": 61,
+        "errors": 0,
+        "accuracy": 0.803,
+        "hallucination_precision": 1.0,
+        "hallucination_recall": 0.647,
+        "hallucination_f1": 0.786,
+        "confusion": {
+          "tp": 22,
+          "fp": 0,
+          "tn": 27,
+          "fn": 12
+        },
+        "per_category_accuracy": {
+          "fabricated/contradicts": 1.0,
+          "fabricated/not_found": 0.333,
+          "fabricated/supports": 0.0,
+          "verbatim/contradicts": 1.0,
+          "verbatim/not_found": 0.375,
+          "verbatim/partial": 0.5,
+          "verbatim/supports": 1.0
+        },
+        "total_seconds": 862.6
+      },
+      "predictions": [
+        {
+          "id": "c01",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.09
+        },
+        {
+          "id": "c02",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 11.63
+        },
+        {
+          "id": "c03",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 12.37
+        },
+        {
+          "id": "c04",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.75
+        },
+        {
+          "id": "c05",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 14.37
+        },
+        {
+          "id": "c06",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.12
+        },
+        {
+          "id": "c07",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 11.37
+        },
+        {
+          "id": "c08",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 11.19
+        },
+        {
+          "id": "c09",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.5
+        },
+        {
+          "id": "c10",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 12.83
+        },
+        {
+          "id": "c11",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 12.65
+        },
+        {
+          "id": "c12",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 20.38
+        },
+        {
+          "id": "c13",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 13.49
+        },
+        {
+          "id": "c14",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.61
+        },
+        {
+          "id": "c15",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 16.43
+        },
+        {
+          "id": "c16",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 14.83
+        },
+        {
+          "id": "c17",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 16.63
+        },
+        {
+          "id": "c18",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 23.4
+        },
+        {
+          "id": "c19",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 14.61
+        },
+        {
+          "id": "c20",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 9.02
+        },
+        {
+          "id": "c21",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 13.97
+        },
+        {
+          "id": "c22",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 16.29
+        },
+        {
+          "id": "c23",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 10.32
+        },
+        {
+          "id": "c24",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.35
+        },
+        {
+          "id": "c25",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.19
+        },
+        {
+          "id": "c26",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 14.89
+        },
+        {
+          "id": "c27",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 15.82
+        },
+        {
+          "id": "c28",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.07
+        },
+        {
+          "id": "c29",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 16.64
+        },
+        {
+          "id": "c30",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 13.82
+        },
+        {
+          "id": "c31",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 13.01
+        },
+        {
+          "id": "c32",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 15.25
+        },
+        {
+          "id": "c33",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 15.26
+        },
+        {
+          "id": "c34",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 16.07
+        },
+        {
+          "id": "c35",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 16.43
+        },
+        {
+          "id": "c36",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 16.29
+        },
+        {
+          "id": "c37",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 15.93
+        },
+        {
+          "id": "c38",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 10.44
+        },
+        {
+          "id": "c39",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 9.63
+        },
+        {
+          "id": "c40",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 12.39
+        },
+        {
+          "id": "c41",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 15.72
+        },
+        {
+          "id": "c42",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 15.1
+        },
+        {
+          "id": "c43",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 15.58
+        },
+        {
+          "id": "c44",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 10.57
+        },
+        {
+          "id": "c45",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 11.52
+        },
+        {
+          "id": "c46",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 13.02
+        },
+        {
+          "id": "c47",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 12.49
+        },
+        {
+          "id": "c48",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 8.97
+        },
+        {
+          "id": "c49",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 8.95
+        },
+        {
+          "id": "c50",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 9.21
+        },
+        {
+          "id": "c51",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 17.51
+        },
+        {
+          "id": "c52",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 26.52
+        },
+        {
+          "id": "c53",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 19.45
+        },
+        {
+          "id": "c54",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 25.09
+        },
+        {
+          "id": "c55",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 21.09
+        },
+        {
+          "id": "c56",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 13.82
+        },
+        {
+          "id": "c57",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 9.93
+        },
+        {
+          "id": "c58",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 10.96
+        },
+        {
+          "id": "c59",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 9.84
+        },
+        {
+          "id": "c60",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 10.44
+        },
+        {
+          "id": "c61",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 12.49
+        }
+      ]
+    }
+  }
+}

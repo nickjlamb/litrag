@@ -1,0 +1,1243 @@
+{
+  "config": {
+    "systems": "litrag,ragas,deepeval",
+    "limit": null,
+    "threshold": 0.5,
+    "allow_partial": false,
+    "with_quote": false,
+    "dry_run": false,
+    "out": "/Users/NickLamb/litrag/benchmark/results",
+    "judge_model": "claude-sonnet-4-6",
+    "n_claims": 61
+  },
+  "systems": {
+    "litrag": {
+      "summary": {
+        "n_scored": 61,
+        "errors": 0,
+        "accuracy": 0.984,
+        "hallucination_precision": 0.971,
+        "hallucination_recall": 1.0,
+        "hallucination_f1": 0.986,
+        "confusion": {
+          "tp": 34,
+          "fp": 1,
+          "tn": 26,
+          "fn": 0
+        },
+        "per_category_accuracy": {
+          "fabricated/contradicts": 1.0,
+          "fabricated/not_found": 1.0,
+          "fabricated/supports": 1.0,
+          "verbatim/contradicts": 1.0,
+          "verbatim/not_found": 1.0,
+          "verbatim/partial": 1.0,
+          "verbatim/supports": 0.963
+        },
+        "total_seconds": 176.9,
+        "judge_calls": 52
+      },
+      "predictions": [
+        {
+          "id": "c01",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.84
+        },
+        {
+          "id": "c02",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.83
+        },
+        {
+          "id": "c03",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 2.41
+        },
+        {
+          "id": "c04",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.47
+        },
+        {
+          "id": "c05",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        },
+        {
+          "id": "c06",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.74
+        },
+        {
+          "id": "c07",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.78
+        },
+        {
+          "id": "c08",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.12
+        },
+        {
+          "id": "c09",
+          "pred_faithful": false,
+          "detail": "not_found",
+          "judge_calls": 1,
+          "seconds": 2.87
+        },
+        {
+          "id": "c10",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        },
+        {
+          "id": "c11",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.28
+        },
+        {
+          "id": "c12",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 2.93
+        },
+        {
+          "id": "c13",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 2.76
+        },
+        {
+          "id": "c14",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.4
+        },
+        {
+          "id": "c15",
+          "pred_faithful": false,
+          "detail": "partial",
+          "judge_calls": 1,
+          "seconds": 4.04
+        },
+        {
+          "id": "c16",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.76
+        },
+        {
+          "id": "c17",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.95
+        },
+        {
+          "id": "c18",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.44
+        },
+        {
+          "id": "c19",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        },
+        {
+          "id": "c20",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.05
+        },
+        {
+          "id": "c21",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 4.33
+        },
+        {
+          "id": "c22",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        },
+        {
+          "id": "c23",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.45
+        },
+        {
+          "id": "c24",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.25
+        },
+        {
+          "id": "c25",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.83
+        },
+        {
+          "id": "c26",
+          "pred_faithful": false,
+          "detail": "partial",
+          "judge_calls": 1,
+          "seconds": 3.78
+        },
+        {
+          "id": "c27",
+          "pred_faithful": false,
+          "detail": "not_found",
+          "judge_calls": 1,
+          "seconds": 3.63
+        },
+        {
+          "id": "c28",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.61
+        },
+        {
+          "id": "c29",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.86
+        },
+        {
+          "id": "c30",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.4
+        },
+        {
+          "id": "c31",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        },
+        {
+          "id": "c32",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.56
+        },
+        {
+          "id": "c33",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.95
+        },
+        {
+          "id": "c34",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.11
+        },
+        {
+          "id": "c35",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 2.72
+        },
+        {
+          "id": "c36",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.54
+        },
+        {
+          "id": "c37",
+          "pred_faithful": false,
+          "detail": "not_found",
+          "judge_calls": 1,
+          "seconds": 2.73
+        },
+        {
+          "id": "c38",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.76
+        },
+        {
+          "id": "c39",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.73
+        },
+        {
+          "id": "c40",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 2.7
+        },
+        {
+          "id": "c41",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.08
+        },
+        {
+          "id": "c42",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.62
+        },
+        {
+          "id": "c43",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 2.52
+        },
+        {
+          "id": "c44",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 12.94
+        },
+        {
+          "id": "c45",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.71
+        },
+        {
+          "id": "c46",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.32
+        },
+        {
+          "id": "c47",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        },
+        {
+          "id": "c48",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.14
+        },
+        {
+          "id": "c49",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.95
+        },
+        {
+          "id": "c50",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.38
+        },
+        {
+          "id": "c51",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.86
+        },
+        {
+          "id": "c52",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 2.57
+        },
+        {
+          "id": "c53",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 4.75
+        },
+        {
+          "id": "c54",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        },
+        {
+          "id": "c55",
+          "pred_faithful": false,
+          "detail": "partial",
+          "judge_calls": 1,
+          "seconds": 5.2
+        },
+        {
+          "id": "c56",
+          "pred_faithful": true,
+          "detail": "supports",
+          "judge_calls": 1,
+          "seconds": 3.74
+        },
+        {
+          "id": "c57",
+          "pred_faithful": false,
+          "detail": "not_found",
+          "judge_calls": 1,
+          "seconds": 2.18
+        },
+        {
+          "id": "c58",
+          "pred_faithful": false,
+          "detail": "partial",
+          "judge_calls": 1,
+          "seconds": 3.14
+        },
+        {
+          "id": "c59",
+          "pred_faithful": false,
+          "detail": "contradicts",
+          "judge_calls": 1,
+          "seconds": 3.15
+        },
+        {
+          "id": "c60",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        },
+        {
+          "id": "c61",
+          "pred_faithful": false,
+          "detail": "hallucinated_quote",
+          "judge_calls": 0,
+          "seconds": 0.0
+        }
+      ]
+    },
+    "ragas": {
+      "summary": {
+        "n_scored": 0,
+        "errors": 61,
+        "accuracy": 0.0,
+        "hallucination_precision": 0.0,
+        "hallucination_recall": 0.0,
+        "hallucination_f1": 0.0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "per_category_accuracy": {},
+        "total_seconds": 0.0
+      },
+      "predictions": [
+        {
+          "id": "c01",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.01
+        },
+        {
+          "id": "c02",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c03",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.01
+        },
+        {
+          "id": "c04",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c05",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c06",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c07",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c08",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c09",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c10",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c11",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c12",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c13",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c14",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c15",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c16",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c17",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c18",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c19",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c20",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c21",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c22",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c23",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c24",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c25",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c26",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c27",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c28",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c29",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c30",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c31",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c32",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c33",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c34",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c35",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c36",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c37",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c38",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c39",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c40",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c41",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c42",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c43",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c44",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c45",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c46",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c47",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c48",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c49",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c50",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c51",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c52",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c53",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c54",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c55",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c56",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c57",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c58",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c59",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c60",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c61",
+          "pred_faithful": null,
+          "detail": "error: AsyncMessages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        }
+      ]
+    },
+    "deepeval": {
+      "summary": {
+        "n_scored": 0,
+        "errors": 61,
+        "accuracy": 0.0,
+        "hallucination_precision": 0.0,
+        "hallucination_recall": 0.0,
+        "hallucination_f1": 0.0,
+        "confusion": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "per_category_accuracy": {},
+        "total_seconds": 0.0
+      },
+      "predictions": [
+        {
+          "id": "c01",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c02",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c03",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c04",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c05",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c06",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c07",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c08",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c09",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c10",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c11",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c12",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c13",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c14",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c15",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c16",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c17",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c18",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c19",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c20",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c21",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c22",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c23",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c24",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c25",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c26",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c27",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c28",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c29",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c30",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c31",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c32",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c33",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c34",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c35",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c36",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c37",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c38",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c39",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c40",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c41",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c42",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c43",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c44",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c45",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c46",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c47",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c48",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c49",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c50",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c51",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c52",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c53",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c54",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c55",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c56",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c57",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c58",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c59",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c60",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        },
+        {
+          "id": "c61",
+          "pred_faithful": null,
+          "detail": "error: Messages.create() got an unexpected keyword argument 'temperature'",
+          "seconds": 0.0
+        }
+      ]
+    }
+  }
+}

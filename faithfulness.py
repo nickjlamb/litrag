@@ -95,14 +95,24 @@ def grade_support(claim: str, passage: str, temperature: float = 0.0) -> dict:
     Uses forced tool use for validated structured output, and caches the (potentially
     long) passage so checking several claims against one source reuses it.
     """
+    import inspect
+
     from anthropic import Anthropic
 
     client = Anthropic()
+    # anthropic SDK 1.x removed sampling controls (temperature) from
+    # messages.create; pass it only where the installed SDK still accepts it,
+    # so the judge runs on both 0.x and 1.x.
+    sampling = (
+        {"temperature": temperature}
+        if "temperature" in inspect.signature(client.messages.create).parameters
+        else {}
+    )
     resp = client.messages.create(
         model=JUDGE_MODEL,
         max_tokens=512,
-        temperature=temperature,
         system=RUBRIC,
+        **sampling,
         tools=[VERDICT_TOOL],
         tool_choice={"type": "tool", "name": "submit_verdict"},
         messages=[

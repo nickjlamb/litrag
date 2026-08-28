@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- **Faithfulness benchmark** (`benchmark/`): 61-claim hand-labelled set over the sample corpus (support level x quote status, incl. fabricated-quote cases) and a harness scoring LitRAG's two-stage judge against RAGAS and DeepEval faithfulness metrics with the same Claude judge model. Offline `--dry-run` validates the dataset without an API key; results land in `benchmark/results/`. First run: LitRAG 0.984 accuracy / 1.000 hallucination recall vs RAGAS 0.934 / 0.912 and DeepEval 0.803 / 0.647 — full error analysis in `benchmark/README.md`.
+
+### Fixed
+
+- `faithfulness.grade_support` now runs on both anthropic SDK 0.x and 1.x (1.x removed the `temperature` kwarg from `messages.create`; it is now passed only where supported) — fixes fresh installs that resolve to SDK >= 1.0.
+
 ## [0.2.0] - 2026-08-28
 
 ### Added

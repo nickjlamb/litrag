@@ -1,0 +1,409 @@
+{
+  "config": {
+    "systems": "ragas",
+    "limit": null,
+    "threshold": 0.5,
+    "allow_partial": false,
+    "with_quote": false,
+    "dry_run": false,
+    "out": "/Users/NickLamb/litrag/benchmark/results",
+    "judge_model": "claude-sonnet-4-6",
+    "n_claims": 61
+  },
+  "systems": {
+    "ragas": {
+      "summary": {
+        "n_scored": 61,
+        "errors": 0,
+        "accuracy": 0.934,
+        "hallucination_precision": 0.969,
+        "hallucination_recall": 0.912,
+        "hallucination_f1": 0.939,
+        "confusion": {
+          "tp": 31,
+          "fp": 1,
+          "tn": 26,
+          "fn": 3
+        },
+        "per_category_accuracy": {
+          "fabricated/contradicts": 0.8,
+          "fabricated/not_found": 0.667,
+          "fabricated/supports": 0.0,
+          "verbatim/contradicts": 1.0,
+          "verbatim/not_found": 1.0,
+          "verbatim/partial": 1.0,
+          "verbatim/supports": 0.963
+        },
+        "total_seconds": 354.8
+      },
+      "predictions": [
+        {
+          "id": "c01",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 7.88
+        },
+        {
+          "id": "c02",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 6.43
+        },
+        {
+          "id": "c03",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.91
+        },
+        {
+          "id": "c04",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.7
+        },
+        {
+          "id": "c05",
+          "pred_faithful": true,
+          "detail": "score=0.50",
+          "seconds": 6.18
+        },
+        {
+          "id": "c06",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 5.38
+        },
+        {
+          "id": "c07",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 15.33
+        },
+        {
+          "id": "c08",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.76
+        },
+        {
+          "id": "c09",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 3.92
+        },
+        {
+          "id": "c10",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.91
+        },
+        {
+          "id": "c11",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.97
+        },
+        {
+          "id": "c12",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 5.07
+        },
+        {
+          "id": "c13",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 6.59
+        },
+        {
+          "id": "c14",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 5.01
+        },
+        {
+          "id": "c15",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 5.35
+        },
+        {
+          "id": "c16",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 6.65
+        },
+        {
+          "id": "c17",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.35
+        },
+        {
+          "id": "c18",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.41
+        },
+        {
+          "id": "c19",
+          "pred_faithful": true,
+          "detail": "score=0.50",
+          "seconds": 6.8
+        },
+        {
+          "id": "c20",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 5.59
+        },
+        {
+          "id": "c21",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.36
+        },
+        {
+          "id": "c22",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.21
+        },
+        {
+          "id": "c23",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.54
+        },
+        {
+          "id": "c24",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 5.32
+        },
+        {
+          "id": "c25",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 8.6
+        },
+        {
+          "id": "c26",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 8.4
+        },
+        {
+          "id": "c27",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.63
+        },
+        {
+          "id": "c28",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 5.62
+        },
+        {
+          "id": "c29",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.29
+        },
+        {
+          "id": "c30",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 6.62
+        },
+        {
+          "id": "c31",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.44
+        },
+        {
+          "id": "c32",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 6.11
+        },
+        {
+          "id": "c33",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 6.28
+        },
+        {
+          "id": "c34",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 7.92
+        },
+        {
+          "id": "c35",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 5.39
+        },
+        {
+          "id": "c36",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 14.96
+        },
+        {
+          "id": "c37",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.11
+        },
+        {
+          "id": "c38",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.6
+        },
+        {
+          "id": "c39",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 5.66
+        },
+        {
+          "id": "c40",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.28
+        },
+        {
+          "id": "c41",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 7.97
+        },
+        {
+          "id": "c42",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 5.79
+        },
+        {
+          "id": "c43",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 7.73
+        },
+        {
+          "id": "c44",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 6.34
+        },
+        {
+          "id": "c45",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.38
+        },
+        {
+          "id": "c46",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.45
+        },
+        {
+          "id": "c47",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.83
+        },
+        {
+          "id": "c48",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.23
+        },
+        {
+          "id": "c49",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.38
+        },
+        {
+          "id": "c50",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 5.3
+        },
+        {
+          "id": "c51",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.19
+        },
+        {
+          "id": "c52",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 5.02
+        },
+        {
+          "id": "c53",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 5.0
+        },
+        {
+          "id": "c54",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.3
+        },
+        {
+          "id": "c55",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.17
+        },
+        {
+          "id": "c56",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.66
+        },
+        {
+          "id": "c57",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 4.7
+        },
+        {
+          "id": "c58",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 5.95
+        },
+        {
+          "id": "c59",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 5.12
+        },
+        {
+          "id": "c60",
+          "pred_faithful": false,
+          "detail": "score=0.00",
+          "seconds": 12.7
+        },
+        {
+          "id": "c61",
+          "pred_faithful": true,
+          "detail": "score=1.00",
+          "seconds": 4.1
+        }
+      ]
+    }
+  }
+}
