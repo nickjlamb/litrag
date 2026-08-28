@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-08-28
+
 ### Added
 
 - **Live corpus ingestion via the PubCrawl MCP server** (`ingest.py`): `load_from_pubcrawl` now talks to [PubCrawl](https://www.pharmatools.ai/pubcrawl) over stdio using the official `mcp` client (`search_pubmed` → `get_abstract`), with the previous direct NCBI E-utilities path kept as an explicit `via="eutils"` fallback. New `save_corpus` writes pulled abstracts in the documented corpus format, and the CLI gains `--via`, `--max-results`, and `--save`. Transient NCBI 429 rate-limit errors are retried with exponential backoff, and `NCBI_API_KEY` is forwarded to the spawned server for the higher request tier. Adds the `mcp` package as a dependency; the server itself installs with `npm install -g @pharmatools/pubcrawl`.
@@ -27,5 +29,6 @@ First tagged release.
 - **Docs**: README with architecture diagram and quick start; from-the-build LangChain vs LlamaIndex framework notes (`docs/framework-notes.md`); contributing guide; issue and PR templates; `CITATION.cff`.
 - **CI**: GitHub Actions workflow running `pytest` and `ruff check` on Python 3.10, 3.11, and 3.12.
 
-[Unreleased]: https://github.com/nickjlamb/litrag/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/nickjlamb/litrag/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/nickjlamb/litrag/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/nickjlamb/litrag/releases/tag/v0.1.0
