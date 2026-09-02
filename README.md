@@ -2,7 +2,7 @@
 
 # LitRAG
 
-**Retrieval-augmented generation over the medical literature — with a citation-faithfulness eval built in.**
+**A citation-faithfulness benchmark over the medical literature — and the small, readable RAG pipeline it measures.**
 
 [![CI](https://github.com/nickjlamb/litrag/actions/workflows/ci.yml/badge.svg)](https://github.com/nickjlamb/litrag/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
@@ -14,7 +14,7 @@
 
 ---
 
-Most RAG demos stop at "it retrieved something and wrote an answer." LitRAG goes one step further: **it checks whether the generated answer is actually supported by the retrieved sources**, and flags hallucinated or unsupported claims. That groundedness layer — not the pipeline — is the point.
+The heart of this repo is a **benchmark**: a 61-claim hand-labelled gold set over real medical abstracts, scored head-to-head against the faithfulness metrics of RAGAS and DeepEval with the same Claude judge for all three systems — including the row where this implementation loses. The pipeline around it is a small, readable RAG over the medical literature whose every claim must carry a verbatim cited quote; it exists so the benchmark has something honest to measure.
 
 The model must return, for every claim it makes, a **verbatim quote** from a retrieved passage plus the PMID it came from. A two-stage eval then verifies each citation:
 
@@ -22,6 +22,23 @@ The model must return, for every claim it makes, a **verbatim quote** from a ret
 2. **Judge** — an LLM-as-judge grades whether the located passage actually *supports* the claim: `supports` / `partial` / `contradicts` / `not_found`.
 
 Embedding and retrieval run fully local (Hugging Face `sentence-transformers` + FAISS — no managed vector-DB key). Only generation and the judge call an LLM API.
+
+## The benchmark
+
+61 hand-labelled claims over the sample corpus, each labelled twice — does the *cited quote* exist verbatim, and does the *passage* support the *claim* — scored against the faithfulness metrics of RAGAS and DeepEval with the same Claude judge model for all three systems. Full methodology, per-case error analysis, and caveats in [`benchmark/`](benchmark/).
+
+| | LitRAG | RAGAS | DeepEval |
+|---|---|---|---|
+| Accuracy | **0.984** | 0.934 | 0.803 |
+| Hallucination recall | **1.000** | 0.912 | 0.647 |
+| Hallucination precision | 0.971 | 0.969 | **1.000** |
+| F1 | **0.986** | 0.939 | 0.786 |
+| Judge calls | **52 of 61** | 61 × 2 stages | 61 × 2 stages |
+| Wall time (61 claims) | **177 s** | 355 s | 863 s |
+
+Where the numbers cut against LitRAG, they're reported: its one error in 61 is a **false alarm** — a genuinely faithful claim flagged by the judge — which is why DeepEval's precision is higher. That error fails in the safe direction for medicine; DeepEval's twelve errors are all misses scored exactly 1.00.
+
+The separating case is a *true* claim citing a *fabricated* quote: both frameworks pass it with a perfect score, because they judge the claim and never see the citation. The deterministic locator flags it without spending a judge call — the case that separates citation checking from claim checking.
 
 ## Architecture
 
@@ -114,24 +131,14 @@ A reviewer can read the whole pipeline in about ten minutes — that's deliberat
 
 ## Why the eval is two-stage
 
+The locator + judge design is not original to this repo: it is ported from a cookbook citation-faithfulness notebook (a cheap, unspoofable string check in front of an LLM judge that grades only from the passage). What is original here is the benchmark above — the gold set, the head-to-head, and the error analysis.
+
 A single LLM-as-judge can be argued with; a string match can't. Requiring a verbatim quote per claim turns hallucination detection into two cheap, complementary checks:
 
 - **The locator is unspoofable.** If the model invents a quote, `rapidfuzz.partial_ratio` against the retrieved passages fails, and the claim is flagged as `hallucinated_quote` without spending a judge call. Paraphrases below the 90-point threshold are rejected too — verbatim means verbatim.
 - **The judge grades only from the passage.** With the quote located, the judge answers a narrower, easier question: does *this passage* support *this claim*? It's forbidden from using outside knowledge, forced into a structured verdict via tool use, and the passage block is prompt-cached so grading many claims against one source is cheap.
 
 An answer that honestly abstains ("the sources don't say") makes no claims and is grounded by definition.
-
-## How it benchmarks
-
-Scored against the faithfulness metrics of RAGAS and DeepEval on a 61-claim hand-labelled set over the sample corpus, with the same Claude judge model for all three systems (methodology, error analysis, and caveats in [`benchmark/`](benchmark/)):
-
-| | LitRAG | RAGAS | DeepEval |
-|---|---|---|---|
-| Accuracy | **0.984** | 0.934 | 0.803 |
-| Hallucination recall | **1.000** | 0.912 | 0.647 |
-| Wall time (61 claims) | **177 s** | 355 s | 863 s |
-
-The separating case is a *true* claim citing a *fabricated* quote: both frameworks pass it with a perfect score, because they judge the claim and never see the citation. The deterministic locator flags it without spending a judge call.
 
 ## Framework notes
 
